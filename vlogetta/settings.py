@@ -85,12 +85,15 @@ WSGI_APPLICATION = 'vlogetta.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# NOT: Production için SQLite (aşağıdaki) yerine PostgreSQL veya MySQL kullanın.
-# Veritabanı ayarlarını da SECRET_KEY gibi ortam değişkenlerinden okumalısınız.
+# PostgreSQL veritabanı ayarları
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'vlogetta_db'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
