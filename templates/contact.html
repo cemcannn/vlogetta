@@ -2,7 +2,7 @@
 
 {% load static %} 
 
-{% block title %}Vlogetta - Contact{% endblock %} 
+{% block title %}Vlogetta - İletişim{% endblock %} 
 
 {% block css_files %}{% endblock %}
 
@@ -11,11 +11,11 @@
     <!-- Page Title -->
     <div class="page-title">
       <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">Contact</h1>
+        <h1 class="mb-2 mb-lg-0">İletişim</h1>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li class="current">Contact</li>
+            <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
+            <li class="current">İletişim</li>
           </ol>
         </nav>
       </div>
@@ -31,7 +31,7 @@
           <div class="col-lg-6">
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-geo-alt"></i>
-              <h3>Address</h3>
+              <h3>Adres</h3>
               <p>İstanbul, Türkiye</p>
             </div>
           </div><!-- End Info Item -->
@@ -39,7 +39,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone"></i>
-              <h3>Call Us</h3>
+              <h3>Bizi Arayın</h3>
               <p>+90 555 000 00 00</p>
             </div>
           </div><!-- End Info Item -->
@@ -47,7 +47,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-envelope"></i>
-              <h3>Email Us</h3>
+              <h3>E-posta Gönder</h3>
               <p>info@vlogetta.com</p>
             </div>
           </div><!-- End Info Item -->
@@ -65,27 +65,27 @@
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="name" class="form-control" placeholder="Adınız" required="">
                 </div>
 
                 <div class="col-md-6">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  <input type="email" class="form-control" name="email" placeholder="E-posta Adresiniz" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <input type="text" class="form-control" name="subject" placeholder="Konu" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Mesajınız" required=""></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
+                  <div class="loading">Yükleniyor</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="sent-message">Mesajınız gönderildi. Teşekkürler!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit">Mesaj Gönder</button>
                 </div>
 
               </div>
@@ -106,16 +106,17 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are">Get In Touch</p>
-            <h3>We'd Love to Hear From You</h3>
+            <p class="who-we-are">İletişime Geçin</p>
+            <h3>Sizden Haber Almaktan Mutluluk Duyarız</h3>
             <p class="fst-italic">
-              Have a story to share, feedback to give, or just want to say hello? We're always excited to connect with our readers and fellow content creators.
+              Paylaşmak istediğiniz bir hikayeniz, verecek geri bildiriminiz veya sadece merhaba demek mi istiyorsunuz? 
+              Okuyucularımız ve diğer içerik üreticileriyle bağlantı kurmaktan her zaman heyecan duyuyoruz.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Collaboration opportunities and partnerships</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Guest posting and content contributions</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Feedback and suggestions for improvement</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>General inquiries and support</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>İş birliği fırsatları ve ortaklıklar</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Misafir yazı ve içerik katkıları</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Geri bildirim ve gelişim önerileri</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Genel sorular ve destek</span></li>
             </ul>
           </div>
 
@@ -123,14 +124,14 @@
             <div class="contact-info">
               <div class="info-item">
                 <i class="bi bi-clock"></i>
-                <h4>Response Time</h4>
-                <p>We typically respond to all inquiries within 24-48 hours during business days.</p>
+                <h4>Yanıt Süresi</h4>
+                <p>Tüm sorularınızı mesai günlerinde genellikle 24-48 saat içinde yanıtlıyoruz.</p>
               </div>
               
               <div class="info-item">
                 <i class="bi bi-people"></i>
-                <h4>Follow Us</h4>
-                <p>Stay connected with us on social media for the latest updates and behind-the-scenes content.</p>
+                <h4>Bizi Takip Edin</h4>
+                <p>En son güncellemeler ve perde arkası içerikler için sosyal medyada bizimle bağlantıda kalın.</p>
                 <div class="social-links d-flex mt-3">
                   <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
                   <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -141,8 +142,8 @@
 
               <div class="info-item">
                 <i class="bi bi-lightbulb"></i>
-                <h4>Content Ideas</h4>
-                <p>Have a topic you'd like us to cover? Send us your suggestions and we might feature it in our next post!</p>
+                <h4>İçerik Fikirleri</h4>
+                <p>Ele almamızı istediğiniz bir konu var mı? Önerilerinizi gönderin, bir sonraki yazımızda yer verebiliriz!</p>
               </div>
             </div>
           </div>
@@ -159,8 +160,8 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <div class="section-title-container d-flex align-items-center justify-content-between">
-          <h2>Frequently Asked Questions</h2>
-          <p>Quick answers to common questions</p>
+          <h2>Sık Sorulan Sorular</h2>
+          <p>Yaygın sorulara hızlı yanıtlar</p>
         </div>
       </div><!-- End Section Title -->
 
@@ -171,25 +172,25 @@
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
 
             <div class="faq-item">
-              <h3>How often do you publish new content?</h3>
+              <h3>Ne sıklıkla yeni içerik yayınlıyorsunuz?</h3>
               <div class="faq-content">
-                <p>We publish new blog posts regularly, typically 3-4 times per week. Subscribe to our newsletter to stay updated with our latest content.</p>
+                <p>Düzenli olarak yeni blog yazıları yayınlıyoruz, genellikle haftada 3-4 kez. En son içeriklerimizden haberdar olmak için bültenimize abone olun.</p>
               </div>
               <i class="faq-toggle bi bi-chevron-right"></i>
             </div><!-- End Faq item-->
 
             <div class="faq-item">
-              <h3>Can I submit a guest post?</h3>
+              <h3>Misafir yazısı gönderebilir miyim?</h3>
               <div class="faq-content">
-                <p>Yes! We welcome guest contributors. Please send us your proposal via the contact form, including your topic idea and a brief outline.</p>
+                <p>Evet! Misafir katkıda bulunanları memnuniyetle karşılıyoruz. Lütfen konu fikriniz ve kısa bir taslak dahil olmak üzere önerinizi iletişim formu aracılığıyla gönderin.</p>
               </div>
               <i class="faq-toggle bi bi-chevron-right"></i>
             </div><!-- End Faq item-->
 
             <div class="faq-item">
-              <h3>Do you accept sponsored content?</h3>
+              <h3>Sponsorlu içerik kabul ediyor musunuz?</h3>
               <div class="faq-content">
-                <p>We carefully consider sponsored content opportunities that align with our values and would be valuable to our readers. Please reach out to discuss potential partnerships.</p>
+                <p>Değerlerimizle uyumlu ve okuyucularımız için değerli olacak sponsorlu içerik fırsatlarını dikkatli bir şekilde değerlendiriyoruz. Potansiyel ortaklıkları görüşmek için lütfen bizimle iletişime geçin.</p>
               </div>
               <i class="faq-toggle bi bi-chevron-right"></i>
             </div><!-- End Faq item-->
@@ -199,25 +200,25 @@
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
 
             <div class="faq-item">
-              <h3>How can I subscribe to your newsletter?</h3>
+              <h3>Bültene nasıl abone olabilirim?</h3>
               <div class="faq-content">
-                <p>You can subscribe to our newsletter through the subscription form in our footer, or by sending us an email with your request.</p>
+                <p>Bültenimize footer'daki abonelik formu aracılığıyla abone olabilir veya talebinizle birlikte bize e-posta gönderebilirsiniz.</p>
               </div>
               <i class="faq-toggle bi bi-chevron-right"></i>
             </div><!-- End Faq item-->
 
             <div class="faq-item">
-              <h3>Can I use your content on my website?</h3>
+              <h3>İçeriklerinizi web sitemde kullanabilir miyim?</h3>
               <div class="faq-content">
-                <p>Our content is protected by copyright. If you'd like to use our content, please contact us to discuss licensing and attribution requirements.</p>
+                <p>İçeriklerimiz telif hakkı ile korunmaktadır. İçeriklerimizi kullanmak istiyorsanız, lisanslama ve atıf gereksinimlerini görüşmek için lütfen bizimle iletişime geçin.</p>
               </div>
               <i class="faq-toggle bi bi-chevron-right"></i>
             </div><!-- End Faq item-->
 
             <div class="faq-item">
-              <h3>How can I advertise on your blog?</h3>
+              <h3>Blogunuzda nasıl reklam verebilirim?</h3>
               <div class="faq-content">
-                <p>We offer various advertising opportunities including banner ads, sponsored posts, and newsletter placements. Contact us for our media kit and pricing information.</p>
+                <p>Banner reklamları, sponsorlu yazılar ve bülten yerleştirmeleri dahil çeşitli reklam fırsatları sunuyoruz. Medya kitimiz ve fiyat bilgileri için bizimle iletişime geçin.</p>
               </div>
               <i class="faq-toggle bi bi-chevron-right"></i>
             </div><!-- End Faq item-->

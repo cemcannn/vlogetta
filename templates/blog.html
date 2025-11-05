@@ -2,7 +2,7 @@
 
 {% load static %} 
 
-{% block title %}Vlogetta - {% if category %}{{ category.name }}{% else %}All Posts{% endif %}{% endblock %} 
+{% block title %}Vlogetta - {% if category %}{{ category.name }}{% else %}Tüm Yazılar{% endif %}{% endblock %} 
 
 {% block css_files %}{% endblock %}
 
@@ -11,10 +11,10 @@
     <!-- Page Title -->
     <div class="page-title position-relative">
       <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">{% if category %}{{ category.name }}{% else %}All Posts{% endif %}</h1>
+        <h1 class="mb-2 mb-lg-0">{% if category %}{{ category.name }}{% else %}Tüm Yazılar{% endif %}</h1>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
             {% if category %}
             <li><a href="{% url 'blog:list' %}">Blog</a></li>
             <li class="current">{{ category.name }}</li>
@@ -67,7 +67,7 @@
 
                       <hr>
 
-                      <a href="{% url 'blog:detail' post.slug %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                      <a href="{% url 'blog:detail' post.slug %}" class="readmore stretched-link"><span>Devamını Oku</span><i class="bi bi-arrow-right"></i></a>
 
                     </div>
 
@@ -76,7 +76,7 @@
                 {% empty %}
                 <div class="col-12">
                   <div class="alert alert-info">
-                    No posts found.
+                    Yazı bulunamadı.
                   </div>
                 </div>
                 {% endfor %}
@@ -120,7 +120,7 @@
 
             <!-- Categories Widget -->
             <div class="categories-widget widget-item">
-              <h3 class="widget-title">Categories</h3>
+              <h3 class="widget-title">Kategoriler</h3>
               <ul>
                 {% for cat in categories %}
                 <li><a href="{% url 'blog:category' cat.slug %}">{{ cat.name }}</a></li>
@@ -130,22 +130,22 @@
 
             <!-- Search Widget -->
             <div class="search-widget widget-item">
-              <h3 class="widget-title">Search</h3>
+              <h3 class="widget-title">Arama</h3>
               <form action="{% url 'blog:list' %}" method="get">
-                <input type="text" name="q" value="{{ request.GET.q }}">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Aramak istediğiniz...">
+                <button type="submit" title="Ara"><i class="bi bi-search"></i></button>
               </form>
             </div><!--/Search Widget -->
 
             <!-- Recent Posts Widget -->
             <div class="recent-posts-widget widget-item">
-              <h3 class="widget-title">Recent Posts</h3>
+              <h3 class="widget-title">Son Yazılar</h3>
               {% for post in recent_posts %}
               <div class="post-item">
                 <img src="{{ post.image.url }}" alt="{{ post.name }}" class="flex-shrink-0">
                 <div>
                   <h4><a href="{% url 'blog:detail' post.slug %}">{{ post.name }}</a></h4>
-                  <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"M d, Y" }}</time>
+                  <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d M Y" }}</time>
                 </div>
               </div><!-- End recent post item-->
               {% endfor %}
