@@ -69,804 +69,107 @@
 </section>
 <!-- /Slider Section -->
 
-<!-- Travel Category Section -->
-<section id="culture-category" class="culture-category section">
+<!-- Dynamic Category Sections -->
+{% for cat_slug, cat_data in category_posts.items %}
+<section id="{{ cat_slug }}-category" class="category-section section">
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
-    <div
-      class="section-title-container d-flex align-items-center justify-content-between"
-    >
-      <h2>Seyahat</h2>
-      <p><a href="{% static 'travel' %}">Tüm Seyahat Yazılarını Gör</a></p>
+    <div class="section-title-container d-flex align-items-center justify-content-between">
+      <h2>{{ cat_data.category.name }}</h2>
+      <p><a href="{% url 'blog:category' cat_data.category.slug %}">Tüm {{ cat_data.category.name }} Yazılarını Gör</a></p>
     </div>
   </div>
   <!-- End Section Title -->
 
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9{% if forloop.counter|divisibleby:2 %} order-md-2{% endif %}">
+        {% if cat_data.main_post %}
         <div class="d-lg-flex post-entry">
-          <a
-            href="blog-details.html"
-            class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block"
-          >
-            <img
-              src="assets/img/post-landscape-6.jpg"
-              alt=""
-              class="img-fluid"
-            />
+          {% if cat_data.main_post.image %}
+          <a href="{% url 'blog:detail' cat_data.main_post.slug %}" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+            <img src="{{ cat_data.main_post.image.url }}" alt="{{ cat_data.main_post.name }}" class="img-fluid" />
           </a>
+          {% endif %}
           <div>
             <div class="post-meta">
-              <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-              <span>{{ post.created_at|date:"M d, Y" }}</span>
+              <span class="date">{{ cat_data.main_post.category.name }}</span> <span class="mx-1">•</span>
+              <span>{{ cat_data.main_post.created_at|date:"d M Y" }}</span>
             </div>
             <h3>
-              <a href="blog-details.html"
-                >What is the son of Football Coach John Gruden, Deuce Gruden
-                doing Now?</a
-              >
+              <a href="{% url 'blog:detail' cat_data.main_post.slug %}">{{ cat_data.main_post.name }}</a>
             </h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio placeat exercitationem magni voluptates dolore. Tenetur
-              fugiat voluptates quas, nobis error deserunt aliquam temporibus
-              sapiente, laudantium dolorum itaque libero eos deleniti?
-            </p>
+            {% if cat_data.main_post.image %}
+            <p>{{ cat_data.main_post.description|truncatewords:25 }}</p>
+            {% else %}
+            <p>{{ cat_data.main_post.description|truncatewords:50 }}</p>
+            {% endif %}
           </div>
         </div>
+        {% endif %}
 
         <div class="row">
-          <div class="col-lg-4">
+          {% for post in cat_data.side_posts|slice:":2" %}
+          <div class="col-lg-6">
             <div class="post-list border-bottom">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-1.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
+              {% if post.image %}
+              <a href="{% url 'blog:detail' post.slug %}">
+                <img src="{{ post.image.url }}" alt="{{ post.name }}" class="img-fluid" />
+              </a>
+              {% endif %}
               <div class="post-meta">
                 <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
+                <span>{{ post.created_at|date:"d M Y" }}</span>
               </div>
               <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >11 Work From Home Part-Time Jobs You Can Do Now</a
-                >
+                <a href="{% url 'blog:detail' post.slug %}">{{ post.name }}</a>
               </h2>
-            </div>
-
-            <div class="post-list">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >5 Great Startup Tips for Female Founders</a
-                >
-              </h2>
+              <p class="text-muted small">{{ post.description|truncatewords:10 }}</p>
             </div>
           </div>
-          <div class="col-lg-8">
+          {% endfor %}
+          
+          {% for post in cat_data.side_posts|slice:"2:4" %}
+          <div class="col-lg-6">
             <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-2.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
+              {% if post.image %}
+              <a href="{% url 'blog:detail' post.slug %}">
+                <img src="{{ post.image.url }}" alt="{{ post.name }}" class="img-fluid" />
+              </a>
+              {% endif %}
               <div class="post-meta">
                 <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
+                <span>{{ post.created_at|date:"d M Y" }}</span>
               </div>
               <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >How to Avoid Distraction and Stay Focused During Video
-                  Calls?</a
-                >
+                <a href="{% url 'blog:detail' post.slug %}">{{ post.name }}</a>
               </h2>
+              <p class="text-muted small">{{ post.description|truncatewords:10 }}</p>
             </div>
           </div>
+          {% endfor %}
         </div>
       </div>
 
       <div class="col-md-3">
+        {% for post in cat_data.posts|slice:"1:" %}
         <div class="post-list border-bottom">
           <div class="post-meta">
             <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
+            <span>{{ post.created_at|date:"d M Y" }}</span>
           </div>
           <h2 class="mb-2">
-            <a href="blog-details.html"
-              >How to Avoid Distraction and Stay Focused During Video Calls?</a
-            >
+            <a href="{% url 'blog:detail' post.slug %}">{{ post.name }}</a>
           </h2>
+          <p class="text-muted small">{{ post.description|truncatewords:8 }}</p>
         </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >17 Pictures of Medium Length Hair in Layers That Will Inspire
-              Your New Haircut</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >9 Half-up/half-down Hairstyles for Long and Medium Hair</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >Life Insurance And Pregnancy: A Working Mom's Guide</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >The Best Homemade Masks for Face (keep the Pimples Away)</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >10 Life-Changing Hacks Every Working Mom Should Know</a
-            >
-          </h2>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
 </section>
-<!-- /Travel Category Section -->
-
-<!-- Culture Category Section -->
-<section id="culture-category" class="culture-category section">
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <div
-      class="section-title-container d-flex align-items-center justify-content-between"
-    >
-      <h2>Kültür</h2>
-      <p><a href="categories.html">Tüm Kültür Yazılarını Gör</a></p>
-    </div>
-  </div>
-  <!-- End Section Title -->
-
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="d-lg-flex post-entry">
-          <a
-            href="blog-details.html"
-            class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block"
-          >
-            <img
-              src="assets/img/post-landscape-6.jpg"
-              alt=""
-              class="img-fluid"
-            />
-          </a>
-          <div>
-            <div class="post-meta">
-              <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-              <span>{{ post.created_at|date:"M d, Y" }}</span>
-            </div>
-            <h3>
-              <a href="blog-details.html"
-                >What is the son of Football Coach John Gruden, Deuce Gruden
-                doing Now?</a
-              >
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio placeat exercitationem magni voluptates dolore. Tenetur
-              fugiat voluptates quas, nobis error deserunt aliquam temporibus
-              sapiente, laudantium dolorum itaque libero eos deleniti?
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="post-list border-bottom">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-1.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >11 Work From Home Part-Time Jobs You Can Do Now</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >5 Great Startup Tips for Female Founders</a
-                >
-              </h2>
-            </div>
-          </div>
-          <div class="col-lg-8">
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-2.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >How to Avoid Distraction and Stay Focused During Video
-                  Calls?</a
-                >
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >How to Avoid Distraction and Stay Focused During Video Calls?</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >17 Pictures of Medium Length Hair in Layers That Will Inspire
-              Your New Haircut</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >9 Half-up/half-down Hairstyles for Long and Medium Hair</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >Life Insurance And Pregnancy: A Working Mom's Guide</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >The Best Homemade Masks for Face (keep the Pimples Away)</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >10 Life-Changing Hacks Every Working Mom Should Know</a
-            >
-          </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /Culture Category Section -->
-
-<!-- Business Category Section -->
-<section id="business-category" class="business-category section">
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <div
-      class="section-title-container d-flex align-items-center justify-content-between"
-    >
-      <h2>İş Dünyası</h2>
-      <p><a href="categories.html">Tüm İş Yazılarını Gör</a></p>
-    </div>
-  </div>
-  <!-- End Section Title -->
-
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="row">
-      <div class="col-md-9 order-md-2">
-        <div class="d-lg-flex post-entry">
-          <a
-            href="blog-details.html"
-            class="me-4 thumbnail d-inline-block mb-4 mb-lg-0"
-          >
-            <img
-              src="assets/img/post-landscape-3.jpg"
-              alt=""
-              class="img-fluid"
-            />
-          </a>
-          <div>
-            <div class="post-meta">
-              <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-              <span>{{ post.created_at|date:"M d, Y" }}</span>
-            </div>
-            <h3>
-              <a href="blog-details.html"
-                >What is the son of Football Coach John Gruden, Deuce Gruden
-                doing Now?</a
-              >
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio placeat exercitationem magni voluptates dolore. Tenetur
-              fugiat voluptates quas, nobis error deserunt aliquam temporibus
-              sapiente, laudantium dolorum itaque libero eos deleniti?
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="post-list border-bottom">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-5.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >11 Work From Home Part-Time Jobs You Can Do Now</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >5 Great Startup Tips for Female Founders</a
-                >
-              </h2>
-            </div>
-          </div>
-          <div class="col-lg-8">
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-7.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >How to Avoid Distraction and Stay Focused During Video
-                  Calls?</a
-                >
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >How to Avoid Distraction and Stay Focused During Video Calls?</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >17 Pictures of Medium Length Hair in Layers That Will Inspire
-              Your New Haircut</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >9 Half-up/half-down Hairstyles for Long and Medium Hair</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >Life Insurance And Pregnancy: A Working Mom's Guide</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >The Best Homemade Masks for Face (keep the Pimples Away)</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >10 Life-Changing Hacks Every Working Mom Should Know</a
-            >
-          </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /Business Category Section -->
-
-<!-- Lifestyle Category Section -->
-<section id="lifestyle-category" class="lifestyle-category section">
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <div
-      class="section-title-container d-flex align-items-center justify-content-between"
-    >
-      <h2>Yaşam Tarzı</h2>
-      <p><a href="categories.html">Tüm Yaşam Tarzı Yazılarını Gör</a></p>
-    </div>
-  </div>
-  <!-- End Section Title -->
-
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="row g-5">
-      <div class="col-lg-4">
-        <div class="post-list lg">
-          <a href="blog-details.html"
-            ><img
-              src="assets/img/post-landscape-8.jpg"
-              alt=""
-              class="img-fluid"
-          /></a>
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2>
-            <a href="blog-details.html"
-              >11 Work From Home Part-Time Jobs You Can Do Now</a
-            >
-          </h2>
-          <p class="mb-4 d-block">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
-            temporibus repudiandae, inventore pariatur numquam cumque possimus
-            exercitationem? Nihil tempore odit ab minus eveniet praesentium,
-            similique blanditiis molestiae ut saepe perspiciatis officia nemo,
-            eos quae cumque. Accusamus fugiat architecto rerum animi atque
-            eveniet, quo, praesentium dignissimos
-          </p>
-        </div>
-
-        <div class="post-list border-bottom">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >The Best Homemade Masks for Face (keep the Pimples Away)</a
-            >
-          </h2>
-        </div>
-
-        <div class="post-list">
-          <div class="post-meta">
-            <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-            <span>{{ post.created_at|date:"M d, Y" }}</span>
-          </div>
-          <h2 class="mb-2">
-            <a href="blog-details.html"
-              >10 Life-Changing Hacks Every Working Mom Should Know</a
-            >
-          </h2>
-        </div>
-      </div>
-
-      <div class="col-lg-8">
-        <div class="row g-5">
-          <div class="col-lg-4 border-start custom-border">
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-6.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2>
-                <a href="blog-details.html">Let's Get Back to Work, New York</a>
-              </h2>
-            </div>
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-5.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2>
-                <a href="blog-details.html"
-                  >How to Avoid Distraction and Stay Focused During Video
-                  Calls?</a
-                >
-              </h2>
-            </div>
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-4.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2>
-                <a href="blog-details.html"
-                  >Why Craigslist Tampa Is One of The Most Interesting Places On
-                  the Web?</a
-                >
-              </h2>
-            </div>
-          </div>
-          <div class="col-lg-4 border-start custom-border">
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-3.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2>
-                <a href="blog-details.html"
-                  >6 Easy Steps To Create Your Own Cute Merch For Instagram</a
-                >
-              </h2>
-            </div>
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-2.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2>
-                <a href="blog-details.html"
-                  >10 Life-Changing Hacks Every Working Mom Should Know</a
-                >
-              </h2>
-            </div>
-            <div class="post-list">
-              <a href="blog-details.html"
-                ><img
-                  src="assets/img/post-landscape-1.jpg"
-                  alt=""
-                  class="img-fluid"
-              /></a>
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2>
-                <a href="blog-details.html"
-                  >5 Great Startup Tips for Female Founders</a
-                >
-              </h2>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="post-list border-bottom">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >How to Avoid Distraction and Stay Focused During Video
-                  Calls?</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list border-bottom">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >17 Pictures of Medium Length Hair in Layers That Will Inspire
-                  Your New Haircut</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list border-bottom">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >9 Half-up/half-down Hairstyles for Long and Medium Hair</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list border-bottom">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >Life Insurance And Pregnancy: A Working Mom's Guide</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list border-bottom">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >The Best Homemade Masks for Face (keep the Pimples Away)</a
-                >
-              </h2>
-            </div>
-
-            <div class="post-list border-bottom">
-              <div class="post-meta">
-                <span class="date">{{ post.category.name }}</span> <span class="mx-1">•</span>
-                <span>{{ post.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h2 class="mb-2">
-                <a href="blog-details.html"
-                  >10 Life-Changing Hacks Every Working Mom Should Know</a
-                >
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /Lifestyle Category Section -->
+<!-- /{{ cat_data.category.name }} Category Section -->
+{% endfor %}
 
 {% endblock %}
 
