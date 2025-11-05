@@ -6,11 +6,13 @@ Django settings for vlogetta project.
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url  # <-- BU SATIRI EKLEYİN
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # .env dosyasını yükle
+# BASE_DIR.parent = manage.py'nin olduğu üst dizin
 load_dotenv(BASE_DIR.parent / '.env')
 
 
@@ -26,7 +28,7 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG ayarını ortam değişkeninden okuyun. Canlı ortamda 'False' olmalıdır.
-DEBUG = os.environ.get('DEBUG', 'True') == 'True' # Varsayılan olarak geliştirmedeki gibi 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True' # Varsayılan olarak geliştirmedeki gibi 'True'
 
 # ALLOWED_HOSTS'u ortam değişkeninden okuyun.
 # Canlı ortamda 'www.siteadi.com,siteadi.com' gibi bir değer verilmelidir.
@@ -35,6 +37,10 @@ ALLOWED_HOSTS = []
 if allowed_hosts_str:
     ALLOWED_HOSTS = allowed_hosts_str.split(',')
 
+# Render'ın kendi adresini otomatik eklemesi için:
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -52,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Static files için
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,19 +90,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'vlogetta.wsgi.application'
 
 
+# PostgreSQL veritabanı ayarları
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-# PostgreSQL veritabanı ayarları
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'vlogetta_db'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-    }
+    'default': dj_database_url.config(
+        # Render'da otomatik PostgreSQL DATABASE_URL sağlanacak
+        # Local'de .env dosyasında DATABASE_URL tanımlanmalı
+        default='postgresql://cemcan:@localhost:5432/vlogetta_db',
+        conn_max_age=600
+    )
 }
 
 
@@ -142,11 +146,31 @@ STATICFILES_DIRS = [
 # tüm statik dosyaları bu klasörde toplayacaktır.
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# WhiteNoise ayarları (Render için static file serving)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
+# Render için kalıcı disk ayarı
+if os.environ.get('RENDER'):
+    MEDIA_ROOT = '/app/media'  # Render'ın mount path'i
+else:
+    MEDIA_ROOT = BASE_DIR / "media"  # Local development
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Production güvenlik ayarları
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_REDIRECT_EXEMPT = []
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    USE_TZ = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
