@@ -1,0 +1,348 @@
+{% extends 'partials/_base.html' %} 
+
+{% load static %} 
+
+{% block title %}Vlogetta - Contact{% endblock %} 
+
+{% block css_files %}{% endblock %}
+
+{% block content %}
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Contact</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="current">Contact</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Address</h3>
+              <p>İstanbul, Türkiye</p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-telephone"></i>
+              <h3>Call Us</h3>
+              <p>+90 555 000 00 00</p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope"></i>
+              <h3>Email Us</h3>
+              <p>info@vlogetta.com</p>
+            </div>
+          </div><!-- End Info Item -->
+
+        </div>
+
+        <div class="row gy-4 mt-1">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.2542!2d28.9784!3d41.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9bd6570f5e1%3A0x8dc0af2849cf4c95!2sSultanahmet%2C%20%C4%B0stanbul!5e0!3m2!1str!2str!4v1699123456789!5m2!1str!2str" frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div><!-- End Google Maps -->
+
+          <div class="col-lg-6">
+            <form action="#" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+              {% csrf_token %}
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+    <!-- Get In Touch Section -->
+    <section id="get-in-touch" class="get-in-touch section light-background">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+            <p class="who-we-are">Get In Touch</p>
+            <h3>We'd Love to Hear From You</h3>
+            <p class="fst-italic">
+              Have a story to share, feedback to give, or just want to say hello? We're always excited to connect with our readers and fellow content creators.
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span>Collaboration opportunities and partnerships</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Guest posting and content contributions</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Feedback and suggestions for improvement</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>General inquiries and support</span></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-info">
+              <div class="info-item">
+                <i class="bi bi-clock"></i>
+                <h4>Response Time</h4>
+                <p>We typically respond to all inquiries within 24-48 hours during business days.</p>
+              </div>
+              
+              <div class="info-item">
+                <i class="bi bi-people"></i>
+                <h4>Follow Us</h4>
+                <p>Stay connected with us on social media for the latest updates and behind-the-scenes content.</p>
+                <div class="social-links d-flex mt-3">
+                  <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                  <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                  <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                  <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <i class="bi bi-lightbulb"></i>
+                <h4>Content Ideas</h4>
+                <p>Have a topic you'd like us to cover? Send us your suggestions and we might feature it in our next post!</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Get In Touch Section -->
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <div class="section-title-container d-flex align-items-center justify-content-between">
+          <h2>Frequently Asked Questions</h2>
+          <p>Quick answers to common questions</p>
+        </div>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="faq-item">
+              <h3>How often do you publish new content?</h3>
+              <div class="faq-content">
+                <p>We publish new blog posts regularly, typically 3-4 times per week. Subscribe to our newsletter to stay updated with our latest content.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>Can I submit a guest post?</h3>
+              <div class="faq-content">
+                <p>Yes! We welcome guest contributors. Please send us your proposal via the contact form, including your topic idea and a brief outline.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>Do you accept sponsored content?</h3>
+              <div class="faq-content">
+                <p>We carefully consider sponsored content opportunities that align with our values and would be valuable to our readers. Please reach out to discuss potential partnerships.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="faq-item">
+              <h3>How can I subscribe to your newsletter?</h3>
+              <div class="faq-content">
+                <p>You can subscribe to our newsletter through the subscription form in our footer, or by sending us an email with your request.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>Can I use your content on my website?</h3>
+              <div class="faq-content">
+                <p>Our content is protected by copyright. If you'd like to use our content, please contact us to discuss licensing and attribution requirements.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>How can I advertise on your blog?</h3>
+              <div class="faq-content">
+                <p>We offer various advertising opportunities including banner ads, sponsored posts, and newsletter placements. Contact us for our media kit and pricing information.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /FAQ Section -->
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .contact .info-item {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    height: 100%;
+  }
+
+  .contact .info-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .contact .info-item i {
+    font-size: 38px;
+    color: #68A4C4;
+    margin-bottom: 15px;
+  }
+
+  .contact .info-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .contact .info-item p {
+    margin-bottom: 0;
+    color: #666;
+  }
+
+  .get-in-touch .contact-info .info-item {
+    padding: 25px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+  }
+
+  .get-in-touch .contact-info .info-item i {
+    font-size: 24px;
+    color: #68A4C4;
+    margin-bottom: 10px;
+  }
+
+  .get-in-touch .contact-info .info-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .get-in-touch .social-links a {
+    color: #68A4C4;
+    margin-right: 10px;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  .get-in-touch .social-links a:hover {
+    color: #4a8ba8;
+  }
+
+  .faq .faq-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.08);
+    position: relative;
+    cursor: pointer;
+  }
+
+  .faq .faq-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0;
+    padding-right: 30px;
+  }
+
+  .faq .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq .faq-item.faq-active .faq-content {
+    max-height: 200px;
+    padding-top: 15px;
+  }
+
+  .faq .faq-toggle {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .faq .faq-item.faq-active .faq-toggle {
+    transform: rotate(90deg);
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // FAQ Toggle Functionality
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('faq-active');
+    });
+  });
+</script>
+{% endblock %}
