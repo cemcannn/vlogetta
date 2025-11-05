@@ -789,6 +789,56 @@ section,
   color: var(--default-color);
 }
 
+/* Custom Slider Improvements */
+.slider .swiper {
+  height: 100vh;
+  min-height: 500px;
+}
+
+.slider .swiper-slide {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.slider .swiper-wrapper {
+  height: 100%;
+}
+
+.slider .swiper-pagination {
+  bottom: 20px;
+}
+
+.slider .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+}
+
+.slider .swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+.slider .swiper-button-next,
+.slider .swiper-button-prev {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.slider .swiper-button-next::after,
+.slider .swiper-button-prev::after {
+  font-size: 20px;
+}
+
+.slider .swiper-button-next:hover,
+.slider .swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 /*--------------------------------------------------------------
 # Trending Category Section
 --------------------------------------------------------------*/

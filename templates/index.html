@@ -17,10 +17,17 @@
           "loop": true,
           "speed": 600,
           "autoplay": {
-            "delay": 5000
+            "delay": 5000,
+            "disableOnInteraction": false,
+            "pauseOnMouseEnter": true
           },
-          "slidesPerView": "auto",
+          "slidesPerView": 1,
           "centeredSlides": true,
+          "spaceBetween": 0,
+          "effect": "fade",
+          "fadeEffect": {
+            "crossFade": true
+          },
           "pagination": {
             "el": ".swiper-pagination",
             "type": "bullets",
@@ -861,4 +868,30 @@
 </section>
 <!-- /Lifestyle Category Section -->
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure swiper is initialized properly
+  setTimeout(function() {
+    const swiperElement = document.querySelector('.swiper.init-swiper');
+    if (swiperElement && window.Swiper) {
+      try {
+        const config = JSON.parse(swiperElement.querySelector('.swiper-config').innerHTML.trim());
+        const swiper = new Swiper(swiperElement, config);
+        
+        // Start autoplay explicitly
+        if (swiper.autoplay) {
+          swiper.autoplay.start();
+        }
+        
+        console.log('Swiper initialized successfully');
+      } catch (error) {
+        console.error('Swiper initialization failed:', error);
+      }
+    }
+  }, 500);
+});
+</script>
 {% endblock %}

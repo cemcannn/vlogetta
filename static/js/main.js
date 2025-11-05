@@ -120,7 +120,9 @@
           // Force update after initialization
           setTimeout(() => {
             swiper.update();
-            swiper.autoplay.start();
+            if (swiper.autoplay) {
+              swiper.autoplay.start();
+            }
           }, 100);
         }
       } catch (error) {
@@ -130,7 +132,11 @@
   }
 
   // Initialize on both DOMContentLoaded and load events
-  document.addEventListener("DOMContentLoaded", initSwiper);
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", initSwiper);
+  } else {
+    initSwiper();
+  }
   window.addEventListener("load", initSwiper);
 
 })();

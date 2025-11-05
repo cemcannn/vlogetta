@@ -4,7 +4,255 @@
 
 {% block title %}Vlogetta - Hakkımızda{% endblock %} 
 
-{% block css_files %}{% endblock %}
+{% block css_files %}
+<style>
+  /* Mission & Vision Section */
+  .mission-vision {
+    padding: 80px 0;
+  }
+
+  .mission-box, .vision-box {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .mission-box:hover, .vision-box:hover {
+    transform: translateY(-5px);
+  }
+
+  .mission-box .icon, .vision-box .icon {
+    background: linear-gradient(45deg, #68A4C4, #4a8ba8);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .mission-box .icon i, .vision-box .icon i {
+    font-size: 36px;
+    color: white;
+  }
+
+  .mission-box h3, .vision-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2c5aa0;
+  }
+
+  .mission-list, .vision-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .mission-list li, .vision-list li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .mission-list i, .vision-list i {
+    color: #68A4C4;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+
+  /* Stats Section */
+  .stats {
+    background: linear-gradient(135deg, #68A4C4, #4a8ba8);
+    color: white;
+    padding: 80px 0;
+  }
+
+  .stats-item {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 40px 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .stats-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .stats-item .purecounter {
+    font-size: 48px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .stats-item p {
+    font-size: 16px;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  /* Values Section */
+  .values {
+    padding: 80px 0;
+  }
+
+  .value-item {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .value-item:hover {
+    transform: translateY(-5px);
+    border-color: #68A4C4;
+    box-shadow: 0 10px 40px rgba(104, 164, 196, 0.2);
+  }
+
+  .value-icon {
+    background: linear-gradient(45deg, #68A4C4, #4a8ba8);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .value-item:hover .value-icon {
+    transform: rotateY(180deg);
+  }
+
+  .value-icon i {
+    font-size: 36px;
+    color: white;
+  }
+
+  .value-item h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2c5aa0;
+  }
+
+  .value-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Team Section Improvements */
+  .team-member {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+
+  .team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+
+  .team-member .pic {
+    margin-right: 20px;
+  }
+
+  .team-member .pic img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .team-member h4 {
+    color: #2c5aa0;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .team-member span {
+    color: #68A4C4;
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .team-member .social a {
+    color: #68A4C4;
+    margin-right: 10px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+
+  .team-member .social a:hover {
+    color: #4a8ba8;
+  }
+
+  /* About Section Improvements */
+  .about .content .who-we-are {
+    color: #68A4C4;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .about .content h3 {
+    color: #2c5aa0;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .about .content ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .about .content ul li:last-child {
+    border-bottom: none;
+  }
+
+  .about .content ul li i {
+    color: #68A4C4;
+    margin-right: 15px;
+    font-size: 18px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mission-box, .vision-box {
+      margin-bottom: 30px;
+    }
+    
+    .stats-item {
+      margin-bottom: 30px;
+    }
+    
+    .value-item {
+      margin-bottom: 30px;
+    }
+  }
+</style>
+{% endblock %}
 
 {% block content %}
 
@@ -29,42 +277,217 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are">Biz Kimiz</p>
-            <h3>Yaratıcı Strateji ile Potansiyeli Ortaya Çıkarıyoruz</h3>
+            <p class="who-we-are">Hikayemiz</p>
+            <h3>Dijital Dünyada Kaliteli İçeriğin Öncüsü</h3>
             <p class="fst-italic">
-              Vlogetta olarak, dijital dünyada kaliteli içerik üretimi ve yaratıcı hikaye anlatımı konusunda tutkulu bir ekibiz. 
-              Amacımız, okuyucularımıza ilham verici ve değerli içerikler sunmaktır.
+              2023 yılında kurulan Vlogetta, Türkiye'nin önde gelen dijital içerik platformlarından biri haline gelmiştir. 
+              Teknoloji, yaşam tarzı, seyahat ve kültür alanlarında ürettiğimiz özgün içeriklerle milyonlarca okuyucuya ulaşıyoruz.
+            </p>
+            <p>
+              Amacımız, sadece bilgi vermek değil, aynı zamanda okuyucularımızın hayatlarına değer katacak, 
+              ilham verecek ve farklı bakış açıları kazandıracak içerikler üretmektir. Her yazımızda kaliteyi, 
+              özgünlüğü ve güvenilirliği ön planda tutarak, dijital medya standartlarını yükseltmeye çalışıyoruz.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Özgün ve kaliteli içerik üretimi</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Yaratıcı hikaye anlatımı ve görsel tasarım</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Okuyucu odaklı deneyim ve sürekli gelişim</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Günde ortalama 50.000+ okuyucu</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>500+ özgün makale ve içerik</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>15+ uzman yazar ve editör kadrosu</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>%98 okuyucu memnuniyet oranı</span></li>
             </ul>
           </div>
 
           <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
             <div class="row gy-4">
               <div class="col-lg-6">
-                <img src="assets/img/about-company-1.jpg" class="img-fluid" alt="">
+                <img src="{% static 'img/about-company-1.jpg' %}" class="img-fluid" alt="Vlogetta Ofis">
               </div>
               <div class="col-lg-6">
                 <div class="row gy-4">
                   <div class="col-lg-12">
-                    <img src="assets/img/about-company-2.jpg" class="img-fluid" alt="">
+                    <img src="{% static 'img/about-company-2.jpg' %}" class="img-fluid" alt="Ekip Çalışması">
                   </div>
                   <div class="col-lg-12">
-                    <img src="assets/img/about-company-3.jpg" class="img-fluid" alt="">
+                    <img src="{% static 'img/about-company-3.jpg' %}" class="img-fluid" alt="Yaratıcı Süreç">
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>
 
       </div>
     </section><!-- /About Section -->
+
+    <!-- Mission & Vision Section -->
+    <section id="mission-vision" class="mission-vision section light-background">
+      
+      <div class="container">
+        
+        <div class="row gy-4">
+          
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="mission-box">
+              <div class="icon">
+                <i class="bi bi-bullseye"></i>
+              </div>
+              <h3>Misyonumuz</h3>
+              <p>
+                Dijital dünyada kaliteli, güvenilir ve ilham verici içerikler üreterek, okuyucularımızın 
+                hayatlarına değer katmak ve onları bilgilendirmek. Türkçe içerik ekosisteminde öncü 
+                olmak ve standartları yükseltmek için çalışıyoruz.
+              </p>
+              <ul class="mission-list">
+                <li><i class="bi bi-arrow-right-circle"></i> Kaliteli ve özgün içerik üretimi</li>
+                <li><i class="bi bi-arrow-right-circle"></i> Okuyucu odaklı yaklaşım</li>
+                <li><i class="bi bi-arrow-right-circle"></i> Sürekli öğrenme ve gelişim</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="vision-box">
+              <div class="icon">
+                <i class="bi bi-eye"></i>
+              </div>
+              <h3>Vizyonumuz</h3>
+              <p>
+                2030 yılına kadar Türkiye'nin en güvenilir ve en çok takip edilen dijital içerik 
+                platformu olmak. Teknoloji ve yaratıcılığı harmanlayarak, geleceğin medya deneyimini 
+                bugünden şekillendirmek istiyoruz.
+              </p>
+              <ul class="vision-list">
+                <li><i class="bi bi-arrow-right-circle"></i> Sektörde liderlik konumu</li>
+                <li><i class="bi bi-arrow-right-circle"></i> Global ölçekte tanınırlık</li>
+                <li><i class="bi bi-arrow-right-circle"></i> Yenilikçi medya deneyimleri</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Mission & Vision Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+      
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        
+        <div class="row gy-4">
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Yayınlanan Makale</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="50000" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Günlük Okuyucu</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Uzman Editör</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Memnuniyet Oranı (%)</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Values Section -->
+    <section id="values" class="values section light-background">
+      
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Değerlerimiz</h2>
+        <p>Vlogetta olarak bizi yönlendiren temel ilkeler</p>
+      </div>
+
+      <div class="container">
+        
+        <div class="row gy-4">
+          
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="value-item">
+              <div class="value-icon">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <h3>Güvenilirlik</h3>
+              <p>Her içeriğimizde doğruluk ve güvenilirliği esas alır, okuyucularımıza her zaman en doğru bilgiyi sunmaya çalışırız.</p>
+            </div>
+          </div><!-- End Value Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="value-item">
+              <div class="value-icon">
+                <i class="bi bi-lightbulb"></i>
+              </div>
+              <h3>Yaratıcılık</h3>
+              <p>Sıradan olanın ötesine geçerek, yaratıcı ve özgün yaklaşımlarla içeriklerimizi farklılaştırıyoruz.</p>
+            </div>
+          </div><!-- End Value Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="value-item">
+              <div class="value-icon">
+                <i class="bi bi-people"></i>
+              </div>
+              <h3>Topluluk</h3>
+              <p>Okuyucularımızla güçlü bağlar kurarak, birlikte büyüyen ve öğrenen bir topluluk oluşturuyoruz.</p>
+            </div>
+          </div><!-- End Value Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="value-item">
+              <div class="value-icon">
+                <i class="bi bi-gear"></i>
+              </div>
+              <h3>Kalite</h3>
+              <p>Her detayda mükemmelliği hedefleyerek, yüksek kalite standartlarını asla ödün vermeden koruyoruz.</p>
+            </div>
+          </div><!-- End Value Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="value-item">
+              <div class="value-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <h3>Gelişim</h3>
+              <p>Sürekli öğrenme ve gelişim anlayışıyla, hem kendimizi hem de platformumuzu her gün daha da ileriye taşıyoruz.</p>
+            </div>
+          </div><!-- End Value Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="600">
+            <div class="value-item">
+              <div class="value-icon">
+                <i class="bi bi-heart"></i>
+              </div>
+              <h3>Tutku</h3>
+              <p>Yaptığımız işe olan tutkumuz, her projeye ve her yazıya yansır, bu da farkımızı yaratır.</p>
+            </div>
+          </div><!-- End Value Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Values Section -->
 
     <!-- Team Section -->
     <section id="team" class="team section">
@@ -156,3 +579,48 @@
     </section><!-- /Team Section -->
 
     {% endblock %}
+
+{% block extra_js %}
+<script>
+  // Simple counter animation
+  function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 100;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      element.textContent = Math.floor(current).toLocaleString();
+    }, 20);
+  }
+
+  // Initialize counters when in viewport
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll('.purecounter');
+        counters.forEach(counter => {
+          const target = parseInt(counter.dataset.purecounterEnd);
+          animateCounter(counter, target);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Start observing the stats section
+  document.addEventListener('DOMContentLoaded', () => {
+    const statsSection = document.querySelector('#stats');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+  });
+</script>
+{% endblock %}
