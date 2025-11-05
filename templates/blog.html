@@ -40,10 +40,12 @@
                 <div class="col-lg-6">
                   <article class="position-relative h-100">
 
+                    {% if post.image %}
                     <div class="post-img position-relative overflow-hidden">
                       <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.name }}">
                       <span class="post-date">{{ post.created_at|date:"F d" }}</span>
                     </div>
+                    {% endif %}
 
                     <div class="post-content d-flex flex-column">
 
@@ -142,7 +144,9 @@
               <h3 class="widget-title">Son Yazılar</h3>
               {% for post in recent_posts %}
               <div class="post-item">
+                {% if post.image %}
                 <img src="{{ post.image.url }}" alt="{{ post.name }}" class="flex-shrink-0">
+                {% endif %}
                 <div>
                   <h4><a href="{% url 'blog:detail' post.slug %}">{{ post.name }}</a></h4>
                   <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d M Y" }}</time>

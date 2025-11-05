@@ -36,9 +36,11 @@
 
               <article class="article">
 
+                {% if post.image %}
                 <div class="post-img">
                   <img src="{{ post.image.url }}" alt="{{ post.name }}" class="img-fluid">
                 </div>
+                {% endif %}
 
                 <h2 class="title">{{ post.name }}</h2>
 
@@ -126,7 +128,9 @@
               <h3 class="widget-title">Son Yazılar</h3>
               {% for recent_post in recent_posts %}
               <div class="post-item">
+                {% if recent_post.image %}
                 <img src="{{ recent_post.image.url }}" alt="{{ recent_post.name }}" class="flex-shrink-0">
+                {% endif %}
                 <div>
                   <h4><a href="{% url 'blog:detail' recent_post.slug %}">{{ recent_post.name }}</a></h4>
                   <time datetime="{{ recent_post.created_at|date:'Y-m-d' }}">{{ recent_post.created_at|date:"d M Y" }}</time>
