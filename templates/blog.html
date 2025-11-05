@@ -1,0 +1,161 @@
+{% extends 'partials/_base.html' %} 
+
+{% load static %} 
+
+{% block title %}Vlogetta - {% if category %}{{ category.name }}{% else %}All Posts{% endif %}{% endblock %} 
+
+{% block css_files %}{% endblock %}
+
+{% block content %}
+
+    <!-- Page Title -->
+    <div class="page-title position-relative">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">{% if category %}{{ category.name }}{% else %}All Posts{% endif %}</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            {% if category %}
+            <li><a href="{% url 'blog:list' %}">Blog</a></li>
+            <li class="current">{{ category.name }}</li>
+            {% else %}
+            <li class="current">Blog</li>
+            {% endif %}
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8">
+
+          <!-- Blog Posts Section -->
+          <section id="blog-posts" class="blog-posts section">
+
+            <div class="container">
+              <div class="row gy-4">
+                {% for post in posts %}
+                <div class="col-lg-6">
+                  <article class="position-relative h-100">
+
+                    <div class="post-img position-relative overflow-hidden">
+                      <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.name }}">
+                      <span class="post-date">{{ post.created_at|date:"F d" }}</span>
+                    </div>
+
+                    <div class="post-content d-flex flex-column">
+
+                      <h3 class="post-title">{{ post.name }}</h3>
+
+                      <div class="meta d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-geo-alt"></i> <span class="ps-2">{{ post.location }}</span>
+                        </div>
+                        {% if post.category %}
+                        <span class="px-3 text-black-50">/</span>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-folder2"></i> <span class="ps-2">{{ post.category.name }}</span>
+                        </div>
+                        {% endif %}
+                      </div>
+
+                      <p>
+                        {{ post.description|truncatewords:30 }}
+                      </p>
+
+                      <hr>
+
+                      <a href="{% url 'blog:detail' post.slug %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+
+                    </div>
+
+                  </article>
+                </div><!-- End post list item -->
+                {% empty %}
+                <div class="col-12">
+                  <div class="alert alert-info">
+                    No posts found.
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+          </section><!-- /Blog Posts Section -->
+
+          {% if posts.has_other_pages %}
+          <!-- Blog Pagination Section -->
+          <section id="blog-pagination" class="blog-pagination section">
+            <div class="container">
+              <div class="d-flex justify-content-center">
+                <ul>
+                  {% if posts.has_previous %}
+                  <li><a href="?page={{ posts.previous_page_number }}"><i class="bi bi-chevron-left"></i></a></li>
+                  {% endif %}
+
+                  {% for i in posts.paginator.page_range %}
+                    {% if posts.number == i %}
+                    <li><a href="#" class="active">{{ i }}</a></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if posts.has_next %}
+                  <li><a href="?page={{ posts.next_page_number }}"><i class="bi bi-chevron-right"></i></a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </section><!-- /Blog Pagination Section -->
+          {% endif %}
+
+        </div>
+
+        <div class="col-lg-4 sidebar">
+
+          <div class="widgets-container">
+
+            <!-- Categories Widget -->
+            <div class="categories-widget widget-item">
+              <h3 class="widget-title">Categories</h3>
+              <ul>
+                {% for cat in categories %}
+                <li><a href="{% url 'blog:category' cat.slug %}">{{ cat.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div><!--/Categories Widget -->
+
+            <!-- Search Widget -->
+            <div class="search-widget widget-item">
+              <h3 class="widget-title">Search</h3>
+              <form action="{% url 'blog:list' %}" method="get">
+                <input type="text" name="q" value="{{ request.GET.q }}">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+              </form>
+            </div><!--/Search Widget -->
+
+            <!-- Recent Posts Widget -->
+            <div class="recent-posts-widget widget-item">
+              <h3 class="widget-title">Recent Posts</h3>
+              {% for post in recent_posts %}
+              <div class="post-item">
+                <img src="{{ post.image.url }}" alt="{{ post.name }}" class="flex-shrink-0">
+                <div>
+                  <h4><a href="{% url 'blog:detail' post.slug %}">{{ post.name }}</a></h4>
+                  <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"M d, Y" }}</time>
+                </div>
+              </div><!-- End recent post item-->
+              {% endfor %}
+            </div><!--/Recent Posts Widget -->
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}
