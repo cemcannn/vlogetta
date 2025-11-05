@@ -28,7 +28,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField()
     location = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='blog/')
+    image = models.ImageField(upload_to='blog/', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts', verbose_name="Kategori", null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_trending = models.BooleanField(default=False)
