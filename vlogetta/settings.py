@@ -12,8 +12,8 @@ import dj_database_url  # <-- BU SATIRI EKLEYİN
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # .env dosyasını yükle
-# BASE_DIR.parent = manage.py'nin olduğu üst dizin
-load_dotenv(BASE_DIR.parent / '.env')
+# BASE_DIR = manage.py'nin olduğu dizin
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
