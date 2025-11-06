@@ -91,7 +91,7 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 
 ## İletişim
 
-Proje sahibi: [İsminiz]
-Email: [email@example.com]
+Proje sahibi: Cem Can
+Email: cmcan@windowslive.com
 
-Proje Linki: [https://github.com/[kullaniciadi]/vlogetta](https://github.com/[kullaniciadi]/vlogetta)
+Proje Linki: [https://github.com/cemcan/vlogetta](https://github.com/cemcan/vlogetta)
