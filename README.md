@@ -46,23 +46,32 @@ env\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-4. Veritabanı migration'larını çalıştırın:
+4. Ortam değişkenlerini ayarlayın:
 ```bash
-cd vlogetta
+# .env.example dosyasını .env olarak kopyalayın
+cp .env.example .env
+
+# .env dosyasını düzenleyerek SECRET_KEY ve diğer ayarları yapın
+# SECRET_KEY için güvenli bir anahtar üretmek için:
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+5. Veritabanı migration'larını çalıştırın:
+```bash
 python manage.py migrate
 ```
 
-5. Süper kullanıcı oluşturun (isteğe bağlı):
+6. Süper kullanıcı oluşturun (isteğe bağlı):
 ```bash
 python manage.py createsuperuser
 ```
 
-6. Sunucuyu başlatın:
+7. Sunucuyu başlatın:
 ```bash
 python manage.py runserver
 ```
 
-7. Tarayıcınızda `http://127.0.0.1:8000` adresine gidin.
+8. Tarayıcınızda `http://127.0.0.1:8000` adresine gidin.
 
 ## Proje Yapısı
 
