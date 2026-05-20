@@ -14,23 +14,8 @@ jobs:
           cd /home/cemc/vlogetta
           git pull
 
-      - name: Install dependencies
+      - name: Build and restart container
         run: |
           cd /home/cemc/vlogetta
-          source venv/bin/activate
-          pip install -r requirements.txt
-
-      - name: Run migrations
-        run: |
-          cd /home/cemc/vlogetta
-          source venv/bin/activate
-          python manage.py migrate
-
-      - name: Collect static files
-        run: |
-          cd /home/cemc/vlogetta
-          source venv/bin/activate
-          python manage.py collectstatic --noinput
-
-      - name: Restart service
-        run: sudo systemctl restart vlogetta
+          docker compose build
+          docker compose up -d
