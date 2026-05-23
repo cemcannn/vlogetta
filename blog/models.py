@@ -34,11 +34,12 @@ class BlogPost(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts', verbose_name="Kategori", null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_trending = models.BooleanField(default=False)
+    order = models.IntegerField(default=0, verbose_name="Sıralama (kucuk=ust)")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['order', '-created_at']
         verbose_name = 'Blog Post'
         verbose_name_plural = 'Blog Posts'
 

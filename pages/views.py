@@ -22,7 +22,7 @@ class IndexView(TemplateView):
             posts = BlogPost.objects.filter(
                 category=category, 
                 is_active=True
-            ).order_by('-created_at')[:5]
+            ).order_by("order", "-created_at")[:10]
             if posts.exists():  # Sadece postu olan kategorileri ekle
                 category_posts[category.slug] = {
                     'category': category,

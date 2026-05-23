@@ -17,7 +17,8 @@ class BlogPostImageInline(admin.TabularInline):
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image_preview', 'category', 'location', 'is_active', 'created_at')
+    list_display = ('name', 'image_preview', 'category', 'order', 'location', 'is_active', 'is_trending', 'created_at')
+    list_editable = ("order", "is_active", "is_trending")
     list_filter = ('is_active', 'category', 'created_at')
     search_fields = ('name', 'description', 'location')
     prepopulated_fields = {'slug': ('name',)}
@@ -114,14 +115,14 @@ class BlogPostAdmin(admin.ModelAdmin):
                     '<div style="background: #e9ecef; padding: 12px; border-radius: 6px; margin: 5px 0;">'
                     '<strong>📸 Kapak Görseli Bilgileri:</strong><br>'
                     '• Orijinal boyut: {}x{} piksel<br>'
-                    '• Dosya boyutu: {:.1f} KB<br>'
+                    '• Dosya boyutu: {} KB<br>'
                     '• Format: {}<br>'
                     '• Blog kalitesi: {}<br>'
                     '• Index durumu: {}<br>'
                     '<small style="color: #666;">💡 Blog sayfası: Orijinal boyut | Index sayfası: 450x450 kare thumbnail</small>'
                     '</div>',
                     width, height,
-                    file_size / 1024,
+                    round(file_size / 1024, 1),
                     img.format or 'Bilinmiyor',
                     quality_status,
                     thumb_status

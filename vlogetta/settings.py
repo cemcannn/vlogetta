@@ -34,6 +34,8 @@ allowed_hosts_str = os.environ.get('ALLOWED_HOSTS')
 ALLOWED_HOSTS = []
 if allowed_hosts_str:
     ALLOWED_HOSTS = allowed_hosts_str.split(',')
+# CSRF guvenilir kaynaklari
+CSRF_TRUSTED_ORIGINS = ["https://vlogetta.blog"]
 
 # Application definition
 

@@ -42,7 +42,6 @@
                 </div>
                 {% endif %}
 
-                <h2 class="title">{{ post.name }}</h2>
 
                 <div class="meta-top">
                   <ul>
@@ -58,6 +57,69 @@
 
                 <div class="content">
                   <p>{{ post.description|linebreaks }}</p>
+                  
+                  {% if post.images.all %}
+                  <div class="post-gallery" style="margin-top: 30px;">
+                    <h4>Fotoğraflar</h4>
+                    <div class="row g-3 mt-2">
+                      {% for img in post.images.all %}
+                      {% if img.is_active %}
+                      <div class="col-md-4 col-6">
+                        <img src="{{ img.image.url }}" alt="{{ post.name }}" class="img-fluid rounded gallery-img" data-index="{{ forloop.counter0 }}" style="width:100%; height:200px; object-fit:cover; cursor:pointer; transition:transform 0.3s;" onclick="openLightbox({{ forloop.counter0 }})">
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <!-- Lightbox -->
+                  <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
+                    <button onclick="closeLightbox()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:white; font-size:36px; cursor:pointer; z-index:10001;">&times;</button>
+                    <button id="lb-prev" onclick="changeSlide(-1)" style="position:absolute; left:15px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:white; font-size:40px; cursor:pointer; padding:10px 18px; border-radius:50%; z-index:10001;">&#8249;</button>
+                    <img id="lb-img" src="" style="max-width:90%; max-height:85%; object-fit:contain; border-radius:8px;" />
+                    <button id="lb-next" onclick="changeSlide(1)" style="position:absolute; right:15px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:white; font-size:40px; cursor:pointer; padding:10px 18px; border-radius:50%; z-index:10001;">&#8250;</button>
+                    <div id="lb-counter" style="position:absolute; bottom:20px; color:white; font-size:14px;"></div>
+                  </div>
+
+                  <script>
+                    const images = [{% for img in post.images.all %}{% if img.is_active %}"{{ img.image.url }}",{% endif %}{% endfor %}];
+                    let currentIndex = 0;
+
+                    function openLightbox(idx) {
+                      currentIndex = idx;
+                      updateLightbox();
+                      document.getElementById('lightbox').style.display = 'flex';
+                      document.body.style.overflow = 'hidden';
+                    }
+
+                    function closeLightbox() {
+                      document.getElementById('lightbox').style.display = 'none';
+                      document.body.style.overflow = '';
+                    }
+
+                    function changeSlide(dir) {
+                      currentIndex = (currentIndex + dir + images.length) % images.length;
+                      updateLightbox();
+                    }
+
+                    function updateLightbox() {
+                      document.getElementById('lb-img').src = images[currentIndex];
+                      document.getElementById('lb-counter').textContent = (currentIndex + 1) + ' / ' + images.length;
+                    }
+
+                    document.getElementById('lightbox').addEventListener('click', function(e) {
+                      if (e.target === this) closeLightbox();
+                    });
+
+                    document.addEventListener('keydown', function(e) {
+                      if (document.getElementById('lightbox').style.display === 'flex') {
+                        if (e.key === 'ArrowRight') changeSlide(1);
+                        if (e.key === 'ArrowLeft') changeSlide(-1);
+                        if (e.key === 'Escape') closeLightbox();
+                      }
+                    });
+                  </script>
+                  {% endif %}
                 </div><!-- End post content -->
 
                 <div class="meta-bottom">
@@ -68,7 +130,6 @@
                   </ul>
                   {% endif %}
 
-                  <i class="bi bi-tags"></i>
                   <ul class="tags">
                     <li><a href="#">#vlogetta</a></li>
                     {% if post.category %}
